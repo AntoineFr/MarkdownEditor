@@ -12,18 +12,18 @@ namespace MarkdownEditor
         {
             RegexOptions options = RegexOptions.Multiline;
 
-            text = Regex.Replace(text, @"^(#{1,6}) (.*)$", parseHeader, options);
-            text = Regex.Replace(text, @"^(-|\*|\+) (.+)$", "<ul><li>$2</li></ul>", options);
-            text = Regex.Replace(text, @"(\*\*|__)(.+?)(?<!\s)\1", "<b>$2</b>", options);
-            text = Regex.Replace(text, @"(\*|_)(.+?)(?<!\s)\1", "<i>$2</i>", options);
-            text = Regex.Replace(text, @"`(.+?)`", "<code>$1</code>", options);
-            text = Regex.Replace(text, @"^[0-9]+\. (.+)$", "<ol><li>$1</li></ol>", options);
-            text = Regex.Replace(text, @"^>(.+)$", "<blockquote>$1</blockquote>", options);
-            text = Regex.Replace(text, @"!\[(.+)\]\((.+)\)", "<img src=\"$2\" alt=\"$1\">", options);
-            text = Regex.Replace(text, @"\[(.+)\]\((.+)\)", "<a href=\"$2\" target=\"_blank\">$1</a>", options);
+            text = Regex.Replace(text, @"^(#{1,6}) (.*)$", parseHeader, options); // Header
+            text = Regex.Replace(text, @"^(-|\*|\+) (.+)$", "<ul><li>$2</li></ul>", options); // Unordered list
+            text = Regex.Replace(text, @"(\*\*|__)(.+?)(?<!\s)\1", "<b>$2</b>", options); // Bold
+            text = Regex.Replace(text, @"(\*|_)(.+?)(?<!\s)\1", "<i>$2</i>", options); // Italic
+            text = Regex.Replace(text, @"`(.+?)`", "<code>$1</code>", options); // Inline code
+            text = Regex.Replace(text, @"^[0-9]+\. (.+)$", "<ol><li>$1</li></ol>", options); // Ordered list
+            text = Regex.Replace(text, @"^>(.+)$", "<blockquote>$1</blockquote>", options); // Block code
+            text = Regex.Replace(text, @"!\[(.+)\]\((.+)\)", "<img src=\"$2\" alt=\"$1\">", options); // Image
+            text = Regex.Replace(text, @"\[(.+)\]\((.+)\)", "<a href=\"$2\" target=\"_blank\">$1</a>", options); // Link
 
-            text = Regex.Replace(text, @"  ", "<br>", options);
-            text = Regex.Replace(text, @"(\r|\n){2}", "</p><p>", options);
+            text = Regex.Replace(text, @"  ", "<br>", options); // New lines
+            text = Regex.Replace(text, @"(\r|\n){2}", "</p><p>", options); // Paragraphs
 
             text = Regex.Replace(text, @"</ul>\s*<ul>", "", options);
             text = Regex.Replace(text, @"</ol>\s*<ol>", "", options);
